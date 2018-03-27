@@ -5,7 +5,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { GamePage } from '../pages/game/game';
 import { MenuPage } from '../pages/menu/menu';
-import { SearchRoomPage } from '../pages/search-room/search-room';
+import { RoomsPage } from '../pages/rooms/rooms';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -16,7 +16,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     MyApp,
     GamePage,
     MenuPage,
-    SearchRoomPage,
+    RoomsPage,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +27,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     MyApp,
     GamePage,
     MenuPage,
-    SearchRoomPage,
+    RoomsPage,
   ],
   providers: [
     StatusBar,
