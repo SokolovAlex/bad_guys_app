@@ -1,5 +1,7 @@
 import { Action } from '@ngrx/store';
 
+import { Room } from '../../models/Room';
+
 export const ActionTypes = {
     LOAD_ROOMS: 'FetchRooms',
     LOAD_ROOMS_SUCCESS: 'LoadRoomsSuccess',
@@ -8,12 +10,11 @@ export const ActionTypes = {
 
 export class FetchRooms implements Action {
     type = ActionTypes.LOAD_ROOMS
-    constructor(public payload: any) { }
 }
 
 export class LoadRoomsSuccess implements Action {
     type = ActionTypes.LOAD_ROOMS_SUCCESS
-    constructor(public payload: any) { }
+    constructor(public payload: Room[]) { }
 }
 
 export class LoadRoomsError implements Action {

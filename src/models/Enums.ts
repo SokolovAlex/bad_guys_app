@@ -4,3 +4,8 @@ export const LoadStates = {
     Error: 'Error',
     Loaded: 'Loaded',
 }
+
+export enum ErrorType {
+    unknow = 'Unknown',
+    ajax = 'Ajax',
+}
