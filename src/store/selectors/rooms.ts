@@ -1,3 +1,5 @@
-import * as fromRoot from './../reducers';
+import { State } from './../reducers';
 import { createSelector } from 'reselect';
-import * as _ from 'lodash';
+
+export const getState = (state: State) => { debugger; return state.rooms.currentState; }
+export const getRooms = (state: State) => state.rooms.rooms;

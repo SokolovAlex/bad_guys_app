@@ -2,29 +2,32 @@ import { Actions, ActionTypes } from '../actions/rooms';
 import { tassign } from 'tassign';
 
 import { Room } from '../../models/Room';
-import { LoadStates } from '../../models/Enums';
+import { PageStates } from '../../models/Enums';
 
 export interface State {
-  loadState: string,
+  currentState: PageStates,
   rooms: Room[]
 }
 
 const initialState: State = {
-    loadState: LoadStates.Empty,
-    rooms: []
+  currentState: PageStates.Empty,
+  rooms: []
 };
 
 export function reducer(state = initialState, action: Actions): State {
   switch (action.type) {
     case ActionTypes.LOAD_ROOMS: {
-      return tassign(state, { loadState: LoadStates.InProgress });
+      return tassign(state, { currentState: PageStates.Loading });
     }
 
     case ActionTypes.LOAD_ROOMS_ERROR:
-        return tassign(state, { loadState: LoadStates.Error });
+        return tassign(state, { currentState: PageStates.Error });
+
+    case ActionTypes.CHANGE_STATE:
+        return tassign(state, { currentState: action.payload });
 
     case ActionTypes.LOAD_ROOMS_SUCCESS:
-        return tassign(state, { loadState: LoadStates.Loaded, rooms: action.payload.rooms });
+        return tassign(state, { currentState: PageStates.List, rooms: action.payload.rooms });
 
     default:
       return state;

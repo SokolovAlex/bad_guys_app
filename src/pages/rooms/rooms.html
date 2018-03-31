@@ -11,9 +11,12 @@
     <button class="btn" (touch)="newRoom()" ion-button round icon-start margin-top text-center color="secondary">
         <ion-icon name="add-circle"></ion-icon>
         add
-    </button>
+    </button> {{ state$ | async }}
 
+    <ngx-loading [show]="state$ === PageStates.Loading"></ngx-loading>
 
+    <room-list *ngIf="state$ === PageStates.List"></room-list>
 
+    <edit-room *ngIf="state$ === PageStates.Edit"></edit-room>
 
 </ion-content>
