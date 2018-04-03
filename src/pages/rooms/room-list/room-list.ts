@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 import { Room } from '../../../models/Room';
 
@@ -7,15 +7,15 @@ import { Room } from '../../../models/Room';
   templateUrl: 'room-list.html'
 })
 export class RoomList implements OnInit {
-    rooms: Room[]
+    rooms: Room[];
 
-    constructor() {
-    }
+    @Output() createNew = new EventEmitter();
 
-    ngOnInit() {
+    constructor() { }
 
-    }
+    ngOnInit() { }
 
-    create() {
+    addRoom() {
+        this.createNew.emit();
     }
 }

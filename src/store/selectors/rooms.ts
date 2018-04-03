@@ -1,5 +1,4 @@
-import { State } from './../reducers';
-import { createSelector } from 'reselect';
+import { AppState } from './../reducers';
 
-export const getState = (state: State) => { debugger; return state.rooms.currentState; }
-export const getRooms = (state: State) => state.rooms.rooms;
+export const getState = (state: AppState) => state.rooms.currentState;
+export const getRooms = (state: AppState) => state.rooms.roomList;

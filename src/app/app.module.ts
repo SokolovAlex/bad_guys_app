@@ -15,45 +15,52 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, MetaReducer} from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { reducer } from '../store/reducers';
+import { storeFreeze } from 'ngrx-store-freeze';
+import { storeLogger } from "ngrx-store-logger";
+
 import { environment } from '../environments/environment';
+import { reducers, initialState, AppState } from '../store/reducers';
+
+const metaReducers: MetaReducer<AppState>[] = !environment.production ?
+    [storeFreeze, storeLogger()] 
+    : [];
 
 @NgModule({
-  declarations: [
-    MyApp,
-    GamePage,
-    MenuPage,
-    RoomsPage,
+    declarations: [
+        MyApp,
+        GamePage,
+        MenuPage,
+        RoomsPage,
 
-    EditRoom,
-    RoomList,
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp),
-    StoreModule.forRoot(reducer),
-    StoreDevtoolsModule.instrument({
-      name: 'NgRx Book Store DevTools',
-      logOnly: environment.production,
-    }),
-    LoadingModule.forRoot({
-        animationType: ANIMATION_TYPES.wanderingCubes,
-    }),
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    GamePage,
-    MenuPage,
-    RoomsPage,
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    ScreenOrientation,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
-  ]
+        EditRoom,
+        RoomList,
+    ],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(MyApp),
+        StoreModule.forRoot(reducers, { initialState, metaReducers }),
+        StoreDevtoolsModule.instrument({
+        name: 'NgRx Store DevTools',
+        logOnly: environment.production,
+        }),
+        LoadingModule.forRoot({
+            animationType: ANIMATION_TYPES.wanderingCubes,
+        }),
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        GamePage,
+        MenuPage,
+        RoomsPage,
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        ScreenOrientation,
+        { provide: ErrorHandler, useClass: IonicErrorHandler }
+    ]
 })
 export class AppModule {}

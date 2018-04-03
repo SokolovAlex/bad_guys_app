@@ -8,15 +8,9 @@
 </ion-header>
 
 <ion-content text-center>
-    <button class="btn" (touch)="newRoom()" ion-button round icon-start margin-top text-center color="secondary">
-        <ion-icon name="add-circle"></ion-icon>
-        add
-    </button> {{ state$ | async }}
+    <ngx-loading [show]="(state$ | async) === PageStates.Loading"></ngx-loading>
 
-    <ngx-loading [show]="state$ === PageStates.Loading"></ngx-loading>
+    <room-list *ngIf="(state$ | async) === PageStates.List" (createNew)="onCreateNew()"></room-list>
 
-    <room-list *ngIf="state$ === PageStates.List"></room-list>
-
-    <edit-room *ngIf="state$ === PageStates.Edit"></edit-room>
-
+    <edit-room *ngIf="(state$ | async) === PageStates.Edit"></edit-room>
 </ion-content>
