@@ -1,1 +1,13 @@
-EDIT!!!
+<ion-list padding>
+    <ion-item>
+        <ion-label color="primary" floating>title of room</ion-label>
+        <ion-input [(ngModel)]="title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label stacked>Description</ion-label>
+        <ion-textarea [(ngModel)]="description" class="description-textarea"></ion-textarea>
+    </ion-item>
+
+    <button class="btn menu-btn" (click)="onSave()" ion-button>Save Room</button>
+</ion-list>

@@ -10,10 +10,25 @@ export const ActionTypes = {
     LOAD_ROOMS_SUCCESS: 'LoadRoomsSuccess',
     LOAD_ROOMS_ERROR: 'LoadRoomsError',
 
-    EDIT_ROOM: 'EditRoom',
-    EDIT_ROOM_SUCCESS: 'EditRoomSuccess',
-    EDIT_ROOM_ERROR: 'EditRoomError',
+    SAVE_ROOM: 'SaveRoom',
+    SAVE_ROOM_SUCCESS: 'SaveRoomSuccess',
+    SAVE_ROOM_ERROR: 'SaveRoomError',
 };
+
+export class SaveRoom implements Action {
+    type = ActionTypes.SAVE_ROOM
+    constructor(public payload: Room) { }
+}
+
+export class SaveRoomSuccess implements Action {
+    type = ActionTypes.SAVE_ROOM_SUCCESS
+    constructor(public payload: Room) { }
+}
+
+export class SaveRoomError implements Action {
+    type = ActionTypes.SAVE_ROOM_ERROR
+    constructor(public payload: Room) { }
+}
 
 export class ChangeState implements Action {
     type = ActionTypes.CHANGE_STATE

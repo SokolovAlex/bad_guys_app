@@ -24,7 +24,7 @@ import { environment } from '../environments/environment';
 import { reducers, initialState, AppState } from '../store/reducers';
 
 const metaReducers: MetaReducer<AppState>[] = !environment.production ?
-    [storeFreeze, storeLogger()] 
+    [storeFreeze, storeLogger()]
     : [];
 
 @NgModule({
@@ -42,8 +42,8 @@ const metaReducers: MetaReducer<AppState>[] = !environment.production ?
         IonicModule.forRoot(MyApp),
         StoreModule.forRoot(reducers, { initialState, metaReducers }),
         StoreDevtoolsModule.instrument({
-        name: 'NgRx Store DevTools',
-        logOnly: environment.production,
+            name: 'NgRx Store DevTools',
+            logOnly: environment.production,
         }),
         LoadingModule.forRoot({
             animationType: ANIMATION_TYPES.wanderingCubes,

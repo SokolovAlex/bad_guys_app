@@ -9,13 +9,10 @@ import { Room } from '../../../models/Room';
 export class RoomList implements OnInit {
     rooms: Room[];
 
-    @Output() createNew = new EventEmitter();
+    @Output() openEdit = new EventEmitter();
 
     constructor() { }
 
     ngOnInit() { }
 
-    addRoom() {
-        this.createNew.emit();
-    }
 }

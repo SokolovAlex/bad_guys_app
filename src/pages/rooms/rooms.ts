@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { State } from '../../store/reducers';
+import { AppState } from '../../store/reducers';
 import * as Selectors from '../../store/selectors/rooms';
-import { ChangeState } from '../../store/actions/rooms';
+import { ChangeState, SaveRoom } from '../../store/actions/rooms';
 
 import { PageStates } from '../../models/Enums';
 import { Room } from '../../models/Room';
@@ -21,7 +21,7 @@ export class RoomsPage implements OnInit {
 
     PageStates = PageStates;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private store: Store<State>) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private store: Store<AppState>) {
         this.state$ = store.select(Selectors.getState);
     }
 
@@ -29,10 +29,14 @@ export class RoomsPage implements OnInit {
         this.store.dispatch(new ChangeState(PageStates.Loading));
         setTimeout(() => {
             this.store.dispatch(new ChangeState(PageStates.List));
-        }, 2000);
+        }, 100);
     }
 
-    onCreateNew(){
+    openEdit(room: Room){
         this.store.dispatch(new ChangeState(PageStates.Edit));
+    }
+
+    onCreateNew(room: Room){
+        this.store.dispatch(new SaveRoom(room));
     }
 }

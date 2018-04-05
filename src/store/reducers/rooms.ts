@@ -25,8 +25,22 @@ export function reducer(state = initialState, action: Actions): RoomState {
         case ActionTypes.CHANGE_STATE:
             return tassign(state, { currentState: action.payload });
 
+        case ActionTypes.SAVE_ROOM:
+            const room = action.payload;
+            let newRoomList: Room[];
+            if (room.isNew) {
+                newRoomList = [...state.roomList, room];
+            } else {
+                const editedRoom = state.roomList.find((item: Room) => item.id === room.id);
+                if (editedRoom) {
+                    editedRoom.description = room.description;
+                    editedRoom.title = room.title;
+                }
+            }
+            return tassign(state, { roomList: newRoomList });
+
         case ActionTypes.LOAD_ROOMS_SUCCESS:
-            return tassign(state, { currentState: PageStates.List, roomList: action.payload.rooms });
+            return tassign(state, { currentState: PageStates.List, roomList: action.payload });
 
         default:
             return state;
