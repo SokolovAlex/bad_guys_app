@@ -12,7 +12,7 @@ export const ActionTypes = {
 
     SAVE_ROOM: 'SaveRoom',
     SAVE_ROOM_SUCCESS: 'SaveRoomSuccess',
-    SAVE_ROOM_ERROR: 'SaveRoomError',
+    SERVER_ERROR: 'ServerError',
 };
 
 export class SaveRoom implements Action {
@@ -25,9 +25,9 @@ export class SaveRoomSuccess implements Action {
     constructor(public payload: Room) { }
 }
 
-export class SaveRoomError implements Action {
-    type = ActionTypes.SAVE_ROOM_ERROR
-    constructor(public payload: Room) { }
+export class ServerError implements Action {
+    type = ActionTypes.SERVER_ERROR
+    constructor(public payload: String) { }
 }
 
 export class ChangeState implements Action {
@@ -53,4 +53,7 @@ export class LoadRoomsError implements Action {
 export type Actions = FetchRooms
     | LoadRoomsSuccess
     | LoadRoomsError
-    | ChangeState;
+    | ChangeState
+    | SaveRoom
+    | ServerError
+    | SaveRoomSuccess;

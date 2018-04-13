@@ -1,6 +1,9 @@
 const Sequelize = require('sequelize');
 const config = require('../config').db;
 
+const UserScheme = require('./user');
+const RoomScheme = require('./room');
+
 let db = {};
 
 const init = () => {
@@ -14,14 +17,10 @@ const init = () => {
             console.error('Unable to connect to the database:', err);
         });
 
-    const User = db.define('User', {
-        id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-        hash: { type: Sequelize.STRING, allowNull: true },
-        email: { type: Sequelize.STRING, allowNull: true },
-        name: { type: Sequelize.STRING, allowNull: true },
-        birthDate: { type: Sequelize.DATE, allowNull: true },
-        avatar: { type: Sequelize.STRING, allowNull: true }
-    });
+    const User = db.define('User', UserScheme);
+    const Room = db.define('Room', RoomScheme);
+
+    User.belongsTo(Room, { foreignKey: 'fk_room', targetKey: 'id' });
 
     db.sync();
 };

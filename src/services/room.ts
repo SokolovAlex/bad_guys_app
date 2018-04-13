@@ -24,7 +24,7 @@ export class RoomService {
 
     saveRoom(room: Room): Observable<Room> {
         return this.http
-            .post<Room>(Urls.save, room)c5
+            .post<Room>(Urls.save, room)
             .pipe(catchError((error: any) => Observable.throw(error.json())));
         }
     }
