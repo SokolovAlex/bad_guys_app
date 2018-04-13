@@ -10,7 +10,7 @@
 <ion-content text-center>
     <ngx-loading [show]="(state$ | async) === PageStates.Loading"></ngx-loading>
 
-    <room-list *ngIf="(state$ | async) === PageStates.List" (openEdit)="openEdit()"></room-list>
+    <room-list *ngIf="(state$ | async) === PageStates.List" [rooms]="rooms$ | async" (openEdit)="openEdit()"></room-list>
 
     <edit-room *ngIf="(state$ | async) === PageStates.Edit" (save)="onCreateNew($event)">
     </edit-room>

@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
+import 'rxjs/add/operator/do';
+
 import { AppState } from '../../store/reducers';
 import * as Selectors from '../../store/selectors/rooms';
 import { ChangeState, SaveRoom } from '../../store/actions/rooms';
@@ -17,12 +19,13 @@ import { Room } from '../../models/Room';
 export class RoomsPage implements OnInit {
     state$: Observable<PageStates>;
 
-    rooms: Room[];
+    rooms$: Observable<Room[]>;
 
     PageStates = PageStates;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private store: Store<AppState>) {
         this.state$ = store.select(Selectors.getState);
+        this.rooms$ = this.store.select(Selectors.getRooms);
     }
 
     ngOnInit() {

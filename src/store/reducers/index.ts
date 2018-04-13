@@ -6,7 +6,7 @@ export interface AppState {
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-  rooms: roomReducer
+    rooms: roomReducer
 };
 
 export const initialState = { rooms: roomInitialState };

@@ -1,4 +1,5 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { Room } from '../../../models/Room';
 
@@ -7,12 +8,11 @@ import { Room } from '../../../models/Room';
   templateUrl: 'room-list.html'
 })
 export class RoomList implements OnInit {
-    rooms: Room[];
+    @Input() rooms: Room[];
 
     @Output() openEdit = new EventEmitter();
 
     constructor() { }
 
     ngOnInit() { }
-
 }

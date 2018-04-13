@@ -37,7 +37,7 @@ export function reducer(state = initialState, action: Actions): RoomState {
                     editedRoom.title = room.title;
                 }
             }
-            return tassign(state, { roomList: newRoomList });
+            return tassign(state, { roomList: newRoomList, currentState: PageStates.List});
 
         case ActionTypes.LOAD_ROOMS_SUCCESS:
             return tassign(state, { currentState: PageStates.List, roomList: action.payload });
