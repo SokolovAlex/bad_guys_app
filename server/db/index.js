@@ -3,11 +3,12 @@ const config = require('../config').db;
 
 const UserScheme = require('./user');
 const RoomScheme = require('./room');
+const operatorsAliases = require('./aliases');
 
 let db = {};
 
 const init = () => {
-    db = new Sequelize(config.name, null, null, config.options);
+    db = new Sequelize(config.name, null, null, {...config.options, operatorsAliases});
 
     db.authenticate()
         .then(() => {
@@ -20,9 +21,9 @@ const init = () => {
     const User = db.define('User', UserScheme);
     const Room = db.define('Room', RoomScheme);
 
-    User.belongsTo(Room, { foreignKey: 'fk_room', targetKey: 'id' });
+    User.belongsTo(Room, { foreignKey: 'roomId', targetKey: 'id' });
 
-    db.sync();
+    db.sync({ force: true });
 };
 
 module.exports = {

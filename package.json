@@ -10,8 +10,8 @@
         "lint": "ionic-app-scripts lint",
         "ionic:build": "ionic-app-scripts build",
         "ionic:serve": "ionic-app-scripts serve",
-        "api": "node server/app",
-        "start": "ionic serve"
+        "start": "ionic serve",
+        "api": "nodemon --watch server --watch libs server/app"
     },
     "dependencies": {
         "@angular/common": "5.0.3",
@@ -50,7 +50,8 @@
     },
     "devDependencies": {
         "@ionic/app-scripts": "3.1.8",
-        "@ngrx/store-devtools": "^5.2.0"
+        "@ngrx/store-devtools": "^5.2.0",
+        "nodemon": "^1.17.3"
     },
     "description": "An Ionic project"
 }
