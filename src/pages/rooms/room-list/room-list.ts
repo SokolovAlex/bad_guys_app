@@ -10,7 +10,9 @@ import { Room } from '../../../models/Room';
 export class RoomList implements OnInit {
     @Input() rooms: Room[];
 
-    @Output() openEdit = new EventEmitter();
+    @Output() edit = new EventEmitter();
+    @Output() remove = new EventEmitter();
+    @Output() join = new EventEmitter();
 
     constructor() { }
 

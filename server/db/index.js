@@ -23,7 +23,8 @@ const init = () => {
 
     User.belongsTo(Room, { foreignKey: 'roomId', targetKey: 'id' });
 
-    db.sync({ force: true });
+    db.sync();
+    //db.sync({ force: true });
 };
 
 module.exports = {

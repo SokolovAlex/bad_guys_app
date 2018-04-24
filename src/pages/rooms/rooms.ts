@@ -7,7 +7,7 @@ import 'rxjs/add/operator/do';
 
 import { AppState } from '../../store/reducers';
 import * as Selectors from '../../store/selectors/rooms';
-import { ChangeState, SaveRoom } from '../../store/actions/rooms';
+import { ChangeState, SaveRoom, FetchRooms, DeleteRoom } from '../../store/actions/rooms';
 
 import { PageStates } from '../../models/Enums';
 import { Room } from '../../models/Room';
@@ -29,17 +29,18 @@ export class RoomsPage implements OnInit {
     }
 
     ngOnInit() {
-        this.store.dispatch(new ChangeState(PageStates.Loading));
-        setTimeout(() => {
-            this.store.dispatch(new ChangeState(PageStates.List));
-        }, 100);
+        this.store.dispatch(new FetchRooms());
     }
 
-    openEdit(room: Room){
+    onEdit(room: Room){
         this.store.dispatch(new ChangeState(PageStates.Edit));
     }
 
     onCreateNew(room: Room){
         this.store.dispatch(new SaveRoom(room));
+    }
+
+    onDelete(room: Room){
+        this.store.dispatch(new DeleteRoom(room.id));
     }
 }

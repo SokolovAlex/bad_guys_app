@@ -6,9 +6,5 @@ export class Room {
     created: Date;
     owner: string;
 
-    get isNew(): boolean {
-        return !this.id;
-    }
-
     constructor(public title: string, public description: string) { }
 }

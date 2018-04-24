@@ -8,10 +8,14 @@ export const ActionTypes = {
 
     LOAD_ROOMS: 'FetchRooms',
     LOAD_ROOMS_SUCCESS: 'LoadRoomsSuccess',
-    LOAD_ROOMS_ERROR: 'LoadRoomsError',
 
     SAVE_ROOM: 'SaveRoom',
     SAVE_ROOM_SUCCESS: 'SaveRoomSuccess',
+    EDIT_ROOM_SUCCESS: 'EditRoomSuccess',
+
+    DELETE_ROOM: 'DeleteRoom',
+    DELETE_ROOM_SUCCESS: 'DeleteRoomSuccess',
+
     SERVER_ERROR: 'ServerError',
 };
 
@@ -22,6 +26,11 @@ export class SaveRoom implements Action {
 
 export class SaveRoomSuccess implements Action {
     type = ActionTypes.SAVE_ROOM_SUCCESS
+    constructor(public payload: Room) { }
+}
+
+export class EditRoomSuccess implements Action {
+    type = ActionTypes.EDIT_ROOM_SUCCESS
     constructor(public payload: Room) { }
 }
 
@@ -37,7 +46,6 @@ export class ChangeState implements Action {
 
 export class FetchRooms implements Action {
     type = ActionTypes.LOAD_ROOMS
-    constructor(public payload: any) { }
 }
 
 export class LoadRoomsSuccess implements Action {
@@ -45,15 +53,22 @@ export class LoadRoomsSuccess implements Action {
     constructor(public payload: Room[]) { }
 }
 
-export class LoadRoomsError implements Action {
-    type = ActionTypes.LOAD_ROOMS_ERROR
-    constructor(public payload: any) { }
+export class DeleteRoom implements Action {
+    type = ActionTypes.DELETE_ROOM
+    constructor(public payload: number) { }
+}
+
+export class DeleteRoomSuccess implements Action {
+    type = ActionTypes.DELETE_ROOM_SUCCESS
+    constructor(public payload: number) { }
 }
 
 export type Actions = FetchRooms
     | LoadRoomsSuccess
-    | LoadRoomsError
     | ChangeState
     | SaveRoom
     | ServerError
-    | SaveRoomSuccess;
+    | DeleteRoom
+    | DeleteRoomSuccess
+    | SaveRoomSuccess
+    | EditRoomSuccess;

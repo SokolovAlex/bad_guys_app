@@ -1,4 +1,4 @@
-<button class="btn" (click)="openEdit.emit()" ion-button round icon-start margin-top text-center color="secondary">
+<button class="btn" (click)="edit.emit()" ion-button round icon-start margin-top text-center color="secondary">
     <ion-icon name="add-circle"></ion-icon>
     add
 </button>
@@ -15,19 +15,19 @@
 
     <ion-row>
         <ion-col>
-            <button ion-button icon-left clear small>
+            <button ion-button icon-left clear small (click)="edit.emit(room)">
                 <ion-icon name="thumbs-up"></ion-icon>
                 <div>Edit</div>
             </button>
         </ion-col>
         <ion-col>
-            <button ion-button icon-left clear small>
+            <button ion-button icon-left clear small (click)="remove.emit(room)">
                 <ion-icon name="text"></ion-icon>
                 <div>Delete</div>
             </button>
         </ion-col>
         <ion-col center text-center>
-            <button ion-button icon-left clear small>
+            <button ion-button icon-left clear small (click)="join.emit(room)">
                 <ion-icon name="text"></ion-icon>
                 <div>Join</div>
             </button>

@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('../db');
+const enums = require('../../common/enums');
 
 module.exports = (router) => {
     const dbInstance = db.instance();
@@ -38,13 +39,13 @@ module.exports = (router) => {
                     return roomModel.updateAttributes(dbEntity);
                 })
                 .then(result => {
-                    res.json({ message: 'Success', room: result, type: 'update', error: false })
+                    res.json({ message: 'Success', room: result, type: enums.crud.update, error: false })
                 })
                 .catch(err => res.status(500).json({ message: err.message }));
         } else {
             Room.create(dbEntity)
                 .then(result => {
-                    res.json({ message: 'Success', room: result, type: 'new', error: false })
+                    res.json({ message: 'Success', room: result, type: enums.crud.create, error: false })
                 })
                 .catch(err => res.status(500).json({ message: err.message }));
         }
@@ -52,7 +53,7 @@ module.exports = (router) => {
 
     router.delete('/rooms/:id', (req, res) => {
         const id = req.params.id;
-        Room.destroy(id)
+        Room.destroy({ where: { id } })
             .then(result => {
                 if (!result) return res.status(500).json({ error: "No room" });
                 res.json({ error: false });

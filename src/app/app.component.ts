@@ -2,8 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { ScreenOrientation } from '@ionic-native/screen-orientation';
-import { Auth, User } from '@ionic/cloud-angular';
+// import { Auth, User } from '@ionic/cloud-angular';
 
 import { MenuPage } from '../pages/menu/menu';
 import { GamePage } from '../pages/game/game';
@@ -21,12 +20,11 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar,
-      public splashScreen: SplashScreen,
-      public user: User,
-      public auth: Auth,
-      private screenOrientation: ScreenOrientation) {
+      public splashScreen: SplashScreen
+      // public user: User,
+      // public auth: Auth,
+    ) {
     this.initializeApp();
-    //this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
 
     this.pages = [
       { title: 'Menu', component: MenuPage },
@@ -45,15 +43,6 @@ export class MyApp {
   }
 
   openPage(page) {
-
-    if (true) {
-      debugger;
-      console.log(this.user);
-      console.log(this.auth);
-      this.nav.setRoot(LoginPage);
-      return;
-    }
-
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);

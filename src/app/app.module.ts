@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
+import { EffectsModule } from '@ngrx/effects';
 
 import { MyApp } from './app.component';
 import { GamePage } from '../pages/game/game';
@@ -22,6 +24,8 @@ import { storeLogger } from "ngrx-store-logger";
 
 import { environment } from '../environments/environment';
 import { reducers, initialState, AppState } from '../store/reducers';
+import { RoomsEffects } from '../store/effects/rooms';
+import { RoomService } from '../services/room';
 
 const metaReducers: MetaReducer<AppState>[] = !environment.production ?
     [storeFreeze, storeLogger()]
@@ -38,6 +42,7 @@ const metaReducers: MetaReducer<AppState>[] = !environment.production ?
         RoomList,
     ],
     imports: [
+        HttpClientModule,
         BrowserModule,
         IonicModule.forRoot(MyApp),
         StoreModule.forRoot(reducers, { initialState, metaReducers }),
@@ -45,6 +50,7 @@ const metaReducers: MetaReducer<AppState>[] = !environment.production ?
             name: 'NgRx Store DevTools',
             logOnly: environment.production,
         }),
+        EffectsModule.forRoot([RoomsEffects]),
         LoadingModule.forRoot({
             animationType: ANIMATION_TYPES.wanderingCubes,
         }),
@@ -60,6 +66,7 @@ const metaReducers: MetaReducer<AppState>[] = !environment.production ?
         StatusBar,
         SplashScreen,
         ScreenOrientation,
+        RoomService,
         { provide: ErrorHandler, useClass: IonicErrorHandler }
     ]
 })
