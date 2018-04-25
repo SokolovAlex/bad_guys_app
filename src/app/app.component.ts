@@ -2,12 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-// import { Auth, User } from '@ionic/cloud-angular';
 
 import { MenuPage } from '../pages/menu/menu';
 import { GamePage } from '../pages/game/game';
 import { RoomsPage } from '../pages/rooms/rooms';
-import { LoginPage } from '../pages/auth/auth';
+import { UserSettingsPage } from '../pages/user-settings/user-settings';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,10 +18,10 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar,
+  constructor(
+      public platform: Platform, 
+      public statusBar: StatusBar,
       public splashScreen: SplashScreen
-      // public user: User,
-      // public auth: Auth,
     ) {
     this.initializeApp();
 
@@ -30,6 +29,7 @@ export class MyApp {
       { title: 'Menu', component: MenuPage },
       { title: 'Game', component: GamePage },
       { title: 'Search Room', component: RoomsPage },
+      { title: 'User Settings', component: UserSettingsPage },
     ];
   }
 

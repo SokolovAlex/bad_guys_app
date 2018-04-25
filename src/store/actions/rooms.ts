@@ -46,6 +46,7 @@ export class ChangeState implements Action {
 
 export class FetchRooms implements Action {
     type = ActionTypes.LOAD_ROOMS
+    constructor(public payload?) { }
 }
 
 export class LoadRoomsSuccess implements Action {

@@ -1,5 +1,4 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 
 import { Room } from '../../../models/Room';
 

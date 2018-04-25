@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>User Settings</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="menu-content" text-center>
+    <ion-card text-center>
+        <ion-card-header>
+           Application Id
+        </ion-card-header>
+        <ion-card-content>
+          {{ applicationId }}
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card text-center>
+        <ion-card-content>
+            <ion-item>
+                <ion-label fixed>Username</ion-label>
+                <ion-input type="text" value=""></ion-input>
+            </ion-item>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card text-center>
+        <ion-card-header>
+           Login with
+        </ion-card-header>
+        <ion-card-content>
+            <ion-icon ios="logo-googleplus" md="logo-googleplus" (click)="authByGoogle()"></ion-icon>
+        </ion-card-content>
+      </ion-card>      
+</ion-content>

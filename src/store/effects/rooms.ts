@@ -3,7 +3,7 @@ import { Effect, Actions } from '@ngrx/effects';
 import { of } from 'rxjs/observable/of';
 import { map, switchMap, catchError } from 'rxjs/operators';
 
-import { RoomService} from '../../services/room';
+import { RoomService} from '../../services/room.service';
 import * as actions from './../actions/rooms';
 import { crud } from './../../../common/enums';
 

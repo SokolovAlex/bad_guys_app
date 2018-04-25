@@ -4,11 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { EffectsModule } from '@ngrx/effects';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 
 import { MyApp } from './app.component';
 import { GamePage } from '../pages/game/game';
 import { MenuPage } from '../pages/menu/menu';
 import { RoomsPage } from '../pages/rooms/rooms';
+import { UserSettingsPage } from '../pages/user-settings/user-settings';
 
 import { EditRoom } from '../pages/rooms/edit-room/edit-room';
 import { RoomList } from '../pages/rooms/room-list/room-list';
@@ -25,7 +27,8 @@ import { storeLogger } from "ngrx-store-logger";
 import { environment } from '../environments/environment';
 import { reducers, initialState, AppState } from '../store/reducers';
 import { RoomsEffects } from '../store/effects/rooms';
-import { RoomService } from '../services/room';
+import { RoomService } from '../services/room.service';
+import { UserService } from '../services/user.service';
 
 const metaReducers: MetaReducer<AppState>[] = !environment.production ?
     [storeFreeze, storeLogger()]
@@ -37,6 +40,7 @@ const metaReducers: MetaReducer<AppState>[] = !environment.production ?
         GamePage,
         MenuPage,
         RoomsPage,
+        UserSettingsPage,
 
         EditRoom,
         RoomList,
@@ -61,12 +65,15 @@ const metaReducers: MetaReducer<AppState>[] = !environment.production ?
         GamePage,
         MenuPage,
         RoomsPage,
+        UserSettingsPage,
     ],
     providers: [
         StatusBar,
         SplashScreen,
         ScreenOrientation,
         RoomService,
+        UserService,
+        UniqueDeviceID,
         { provide: ErrorHandler, useClass: IonicErrorHandler }
     ]
 })
