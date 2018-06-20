@@ -12,15 +12,11 @@ export class UserSettingsPage implements OnInit {
   constructor(private userService: UserService) { }
 
   authByGoogle() {
-    fetch('auth/google', {
-        method: 'get'
-    })
-    .then((data) => {
-        debugger;
-    })
-    .catch((err) => {
-        debugger;
-    });
+    this.userService.googleAuth();
+  }
+
+  authByVk() {
+    this.userService.vkAuth();
   }
 
   getInfo() {

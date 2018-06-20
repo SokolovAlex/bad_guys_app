@@ -15,9 +15,9 @@ module.exports = {
             callbackURL: "http://localhost:5555/auth/google/callback"
         },
         vk: {
-            clientID: "6262544",
-            clientSecret: "bPWvd7Zlh2I4jgJ81etI",
-            callbackURL: "http://localhost:5555/auth/vkontakte/callback"
+            clientID: "6465907",
+            clientSecret: "Fw6XoBYrP3J9YI53m8j1",
+            callbackURL: "http://localhost:5555/api/auth/vkontakte/callback"
         }
     },
 }

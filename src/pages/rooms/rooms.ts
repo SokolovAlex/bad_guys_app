@@ -8,6 +8,7 @@ import 'rxjs/add/operator/do';
 import { AppState } from '../../store/reducers';
 import * as Selectors from '../../store/selectors/rooms';
 import { ChangeState, SaveRoom, FetchRooms, DeleteRoom } from '../../store/actions/rooms';
+import { RoomSocketService } from '../../services/room.socket.service';
 
 import { PageStates } from '../../models/Enums';
 import { Room } from '../../models/Room';
@@ -23,9 +24,15 @@ export class RoomsPage implements OnInit {
 
     PageStates = PageStates;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private store: Store<AppState>) {
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        private store: Store<AppState>,
+        public socketService: RoomSocketService) {
         this.state$ = store.select(Selectors.getState);
         this.rooms$ = this.store.select(Selectors.getRooms);
+
+        this.socketService.start();
     }
 
     ngOnInit() {

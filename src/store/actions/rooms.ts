@@ -17,6 +17,7 @@ export const ActionTypes = {
     DELETE_ROOM_SUCCESS: 'DeleteRoomSuccess',
 
     SERVER_ERROR: 'ServerError',
+    SERVER_SUCCESS: 'SERVER_SUCCESS',
 };
 
 export class SaveRoom implements Action {
@@ -64,6 +65,11 @@ export class DeleteRoomSuccess implements Action {
     constructor(public payload: number) { }
 }
 
+export class ServerSuccess implements Action {
+    type = ActionTypes.SERVER_SUCCESS
+    constructor(public payload?) { }
+}
+
 export type Actions = FetchRooms
     | LoadRoomsSuccess
     | ChangeState
@@ -72,4 +78,5 @@ export type Actions = FetchRooms
     | DeleteRoom
     | DeleteRoomSuccess
     | SaveRoomSuccess
-    | EditRoomSuccess;
+    | EditRoomSuccess
+    | ServerSuccess;

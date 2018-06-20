@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('../db');
 const enums = require('../../common/enums');
+const wss = require('../services/websocket');
 
 module.exports = (router) => {
     const dbInstance = db.instance();
@@ -45,7 +46,8 @@ module.exports = (router) => {
         } else {
             Room.create(dbEntity)
                 .then(result => {
-                    res.json({ message: 'Success', room: result, type: enums.crud.create, error: false })
+                    wss.broadcast({ room: result, type: enums.crud.create });
+                    res.json({ message: 'Success', error: false });
                 })
                 .catch(err => res.status(500).json({ message: err.message }));
         }
@@ -56,6 +58,7 @@ module.exports = (router) => {
         Room.destroy({ where: { id } })
             .then(result => {
                 if (!result) return res.status(500).json({ error: "No room" });
+                wss.broadcast({ id, type: enums.crud.remove });
                 res.json({ error: false });
             })
             .catch(err => res.status(500).json({ message: err.message }));

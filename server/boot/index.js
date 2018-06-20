@@ -1,6 +1,8 @@
 module.exports = () => {
 
-    require('./websocket')();
+    const websocket = require('../services/websocket');
+
+    websocket.start();
 
     require('../db').init();
 

@@ -5,7 +5,6 @@ import { map, switchMap, catchError } from 'rxjs/operators';
 
 import { RoomService} from '../../services/room.service';
 import * as actions from './../actions/rooms';
-import { crud } from './../../../common/enums';
 
 @Injectable()
 export class RoomsEffects {
@@ -21,7 +20,7 @@ export class RoomsEffects {
           return this.roomService
             .deleteRoom(action.payload)
             .pipe(
-              map((resp: any) => new actions.DeleteRoomSuccess(action.payload)),  
+              map(() => new actions.ServerSuccess()),  
               catchError(error => of(new actions.ServerError(error)))
             );
           })
@@ -30,7 +29,7 @@ export class RoomsEffects {
     @Effect()
     loadRooms$ = this.actions$.ofType(actions.ActionTypes.LOAD_ROOMS)
       .pipe(
-        switchMap((action: actions.FetchRooms) => {
+        switchMap(() => {
           return this.roomService
             .getRooms()
             .pipe(
@@ -47,9 +46,8 @@ export class RoomsEffects {
           return this.roomService
             .saveRoom(action.payload)
             .pipe(
-              map((resp: any) => {
-                  const room = resp.room;
-                  return resp.type === crud.create ? new actions.SaveRoomSuccess(room) : new actions.SaveRoomSuccess(room);
+              map(resp => {
+                  return new actions.ServerSuccess();
               }),  
               catchError(error => of(new actions.ServerError(error)))
             );

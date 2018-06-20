@@ -28,7 +28,8 @@ export function reducer(state = initialState, action: Actions): RoomState {
             return tassign(state, { currentState: action.payload });
         
         case ActionTypes.DELETE_ROOM_SUCCESS:
-            const newList =  filter(state.roomList, (item) => item.id === action.payload);
+            debugger;
+            const newList =  filter(state.roomList, (item) => item.id !== action.payload);
             return tassign(state, { roomList: newList, currentState: PageStates.List});
 
         case ActionTypes.EDIT_ROOM_SUCCESS:

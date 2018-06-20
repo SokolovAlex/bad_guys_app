@@ -28,6 +28,7 @@ import { environment } from '../environments/environment';
 import { reducers, initialState, AppState } from '../store/reducers';
 import { RoomsEffects } from '../store/effects/rooms';
 import { RoomService } from '../services/room.service';
+import { RoomSocketService } from '../services/room.socket.service';
 import { UserService } from '../services/user.service';
 
 const metaReducers: MetaReducer<AppState>[] = !environment.production ?
@@ -73,6 +74,7 @@ const metaReducers: MetaReducer<AppState>[] = !environment.production ?
         ScreenOrientation,
         RoomService,
         UserService,
+        RoomSocketService,
         UniqueDeviceID,
         { provide: ErrorHandler, useClass: IonicErrorHandler }
     ]

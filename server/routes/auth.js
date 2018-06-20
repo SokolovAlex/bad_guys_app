@@ -1,16 +1,14 @@
 const express = require('express');
 const passport = require('passport');
 
-const router = express.Router();
-
-module.exports = () => {
+module.exports = (router) => {
     const redirects = {
-        successRedirect: '/',
-        failureRedirect: '/'
+        successRedirect: 'http://localhost:8100',
+        failureRedirect: 'http://localhost:8100'
     };
 
     const redirectFunction = (req, res) => {
-        res.redirect('/');
+        res.redirect('http://localhost:8100');
     };
 
     // GET /auth/google
@@ -29,7 +27,6 @@ module.exports = () => {
         passport.authenticate('google', redirects),
         redirectFunction
     );
-
 
     //This function will pass callback, scope and request new token
     router.get('/auth/vkontakte', passport.authenticate('vkontakte'));
