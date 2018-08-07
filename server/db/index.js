@@ -22,6 +22,7 @@ const init = () => {
     const Room = db.define('Room', RoomScheme);
 
     User.belongsTo(Room, { foreignKey: 'roomId', targetKey: 'id' });
+    Room.hasMany(User, { foreignKey: 'members', sourceKey: 'id' })
 
     db.sync();
     //db.sync({ force: true });

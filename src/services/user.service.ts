@@ -3,6 +3,7 @@ import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import config from '../../server/config';
+import { User } from '../models/User';
 
 const root = `http://localhost:${config.port}/api`;
 const Urls = {
@@ -16,10 +17,15 @@ export class UserService {
 
     constructor(private uniqueDeviceID: UniqueDeviceID, private http: HttpClient) { }
 
-    getId(): Promise<any> {
+    getId(): Promise<number> {
         return this.id || this.uniqueDeviceID.get()
             .then((uuid: any) => uuid)
-            .catch((error: any) => `ID - ${ Math.ceil(Math.random() * 1000000) }`);
+            .catch((error: any) => Math.ceil(Math.random() * 1000000));
+    }
+
+    async getUser(): Promise<User> {
+         const id = await this.getId();
+         return { id, name: `ID-${id}` } as User;
     }
 
     googleAuth(): Promise<any> {

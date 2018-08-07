@@ -25,31 +25,26 @@ module.exports = (router) => {
             .catch(err => res.status(500).json({ message: err.message }));
     });
 
-    router.post('/rooms', (req, res) => {
+    router.post('/rooms', async (req, res) => {
         const body = req.body;
 
         const dbEntity = {
             description: body.description,
             title: body.title,
+            members: body.members,
         };
 
         if (body.id) {
-            Room.findById(body.id)
-                .then(roomModel => {
-                    if (!roomModel) throw new Error("No room");
-                    return roomModel.updateAttributes(dbEntity);
-                })
-                .then(result => {
-                    res.json({ message: 'Success', room: result, type: enums.crud.update, error: false })
-                })
-                .catch(err => res.status(500).json({ message: err.message }));
+            const roomModel = await Room.findById(body.id);
+            if (!roomModel) { 
+                return new Error("No room");
+            }
+            const result = await roomModel.updateAttributes(dbEntity);
+            res.json({ message: 'Success', room: result, type: enums.crud.update, error: false });
         } else {
-            Room.create(dbEntity)
-                .then(result => {
-                    wss.broadcast({ room: result, type: enums.crud.create });
-                    res.json({ message: 'Success', error: false });
-                })
-                .catch(err => res.status(500).json({ message: err.message }));
+            const result = await Room.create(dbEntity);
+            wss.broadcast({ room: result, type: enums.crud.create });
+            res.json({ message: 'Success', error: false });
         }
     });
 

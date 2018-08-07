@@ -14,6 +14,7 @@ import { UserSettingsPage } from '../pages/user-settings/user-settings';
 
 import { EditRoom } from '../pages/rooms/edit-room/edit-room';
 import { RoomList } from '../pages/rooms/room-list/room-list';
+import { TapCursor } from '../directives/tap.directive';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -42,6 +43,8 @@ const metaReducers: MetaReducer<AppState>[] = !environment.production ?
         MenuPage,
         RoomsPage,
         UserSettingsPage,
+        
+        TapCursor,
 
         EditRoom,
         RoomList,

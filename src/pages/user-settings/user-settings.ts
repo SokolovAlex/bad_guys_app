@@ -20,7 +20,7 @@ export class UserSettingsPage implements OnInit {
   }
 
   getInfo() {
-      this.userService.getId().then((applicationId) => this.applicationId = applicationId);
+      this.userService.getUser().then(user => this.applicationId = user.name);
   }
 
   ngOnInit(): void {

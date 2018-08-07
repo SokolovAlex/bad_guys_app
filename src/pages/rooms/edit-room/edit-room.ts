@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { Room } from '../../../models/Room';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'edit-room',
@@ -14,15 +15,12 @@ export class EditRoom implements OnInit {
 
     @Output() save = new EventEmitter();
 
-    constructor() {
-      
-    }
+    constructor(private userService: UserService) { }
 
-    ngOnInit() {
+    ngOnInit() {}
 
-    }
-
-    onSave() {
-        this.save.emit(new Room(this.title, this.description));
+    async onSave() {
+        var user = await this.userService.getUser();
+        this.save.emit(new Room(this.title, this.description, [ user ]));
     }
 }
